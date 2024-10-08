@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Spotify Clone | Log In!</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.4/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-black h-screen flex flex-col items-center justify-center">
+
+    <div class="w-full max-w-xs px-6">
+        <div class="mb-10 flex flex-col items-center">
+            <a href="./">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1024px-Spotify_logo_without_text.svg.png" alt="Spotify Logo" class="w-20 h-20">
+            </a>
+            <h1 class="text-4xl text-white font-bold mt-2">Spotify</h1>
+        </div>
+
+        <p class="text-center text-white mb-4"><strong>To continue, log in to Spotify.</strong></p>
+
+        {% if messages %}
+        <div class="bg-red-500 text-white p-4 rounded mb-4">
+            {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form action="{% url 'home-login-post' %}" method="post" id="login-form" class="bg-black">
+            {% csrf_token %}
+            <div class="mb-4">
+                <input type="email" name="email" class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 block w-full appearance-none leading-normal" placeholder="Email address">
+            </div>
+            <div class="mb-6">
+                <input type="password" name="password" class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 block w-full appearance-none leading-normal" placeholder="Password">
+            </div>
+            <div class="mb-4">
+                <a onclick="document.getElementById('login-form').submit();" href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full block text-center">Log in</a>
+            </div>
+            <div class="mb-4 border-b border-gray-600 pb-4">
+                <p class="text-center text-white mb-4"><strong>Don't have an account?</strong></p>
+                <a href="/signup" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full block text-center">Sign Up For Spotify</a>
+            </div>
+            <div class="text-center text-gray-500 text-xs mt-4">
+                <small><strong>If you click "Log In", you agree to Spotify's Terms & Conditions and Privacy Policy.</strong></small>
+            </div>
+        </form>
+
+        <p class="text-center text-gray-500 text-xs mt-4">
+            &copy; Spotify
+        </p>
+    </div>
+
+    <!-- All Javascript/Jqueries -->
+    <script src='{% static "./js/jquery.min.js" %}'></script>
+    <script src='{% static "./js/bootstrap.bundle.min.js" %}'></script>
+    <script src='{% static "./js/jquery-ui.min.js" %}'></script>
+    <script src='{% static "./js/main.js" %}'></script>
+</body>
+
+</html>

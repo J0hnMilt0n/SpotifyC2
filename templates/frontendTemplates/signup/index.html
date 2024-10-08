@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.4/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-black h-screen flex flex-col items-center justify-center">
+
+    <div class="w-full max-w-xs px-6">
+        <div class="mb-10 flex flex-col items-center">
+            <a href="./">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1024px-Spotify_logo_without_text.svg.png" alt="Spotify Logo" class="w-20 h-20">
+            </a>
+            <h1 class="text-4xl text-white font-bold mt-2">Spotify</h1>
+        </div>
+
+        <p class="text-center text-white mb-4"><strong>Sign up with your email address</strong></p>
+
+        {% if messages %}
+        <div class="bg-red-500 text-white p-4 rounded mb-4">
+            {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form action="{% url 'home-signup-post' %}" method="post" id="signup-form" class="bg-black">
+            {% csrf_token %}
+            <div class="mb-4">
+                <input type="text" name="name" class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 block w-full appearance-none leading-normal" placeholder="Name">
+            </div>
+            <div class="mb-4">
+                <input type="email" name="email" class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 block w-full appearance-none leading-normal" placeholder="Email address">
+            </div>
+            <div class="mb-4">
+                <input type="password" name="password" class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 block w-full appearance-none leading-normal" placeholder="Password">
+            </div>
+            <div class="mb-4">
+                <input type="number" name="number" class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 block w-full appearance-none leading-normal" placeholder="Number">
+            </div>
+            <div class="mb-4 text-left">
+                <label for="gender" class="text-white">Gender</label>
+                <select id="gender" class="bg-gray-800 text-white border border-gray-600 rounded py-2 px-4 block w-full appearance-none leading-normal" name="gender">
+                    <option>-- Select --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Not Listed">Not Listed</option>
+                </select>
+            </div>
+            <div class="text-left text-xs text-white mb-4">
+                <small>By clicking on Sign up, you agree to Spotify's Terms and Conditions of Use.<br>
+					<!-- <br>To learn more about how Spotify collects, uses, shares and protects your personal data please read Spotify's Privacy Policy.</small> -->
+            </div>
+            <div class="mb-4">
+                <a href="#" onclick="document.getElementById('signup-form').submit();" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-full block text-center">Sign Up</a>
+            </div>
+            <div>
+                <p class="text-white">Already have an account? <a href="{% url 'home-login' %}" class="text-green-500">Log In</a></p>
+            </div>
+        </form>
+
+        <p class="text-center text-gray-500 text-xs mt-4">
+            &copy; Spotify
+        </p>
+    </div>
+
+    <!-- All Javascript/Jqueries -->
+    <script src='{% static "./js/jquery.min.js" %}'></script>
+    <script src='{% static "./js/bootstrap.bundle.min.js" %}'></script>
+    <script src='{% static "./js/jquery-ui.min.js" %}'></script>
+    <script src='{% static "./js/main.js" %}'></script>
+</body>
+
+</html>
